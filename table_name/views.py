@@ -10,7 +10,12 @@ def insert_topic(request):
     to=Topic.objects.get_or_create(topic_name=tn,email=e)[0]
     
     to.save()
-    return HttpResponse('Topic_name  and email is created')
+    d={'QLTO':Topic.objects.all()}
+    return render(request,'display_topic.html',d)
+
+
+
+
 def insert_webpage(request):
      tn=input('Enter a topic_name : ')
 
@@ -28,7 +33,8 @@ def insert_webpage(request):
          t=input('enter a team : ')
          ob=Webpage.objects.get_or_create(topic_name=to[0],name=n,url=u,team=t)[0]
          ob.save()
-         return HttpResponse('create successfully')    
+         d={'QLWO':Webpage.objects.all()}
+         return render(request,'display_webpage.html',d)  
 
 
      else:
@@ -47,9 +53,9 @@ def insert_accessrecords(request):
      ob.save()'''
     
 
-     n=input('Enter a name :')
+     d = input('Enter a id :')
      
-     ob=Webpage.objects.filter(name=n)
+     ob=Webpage.objects.filter(id = d)
      if ob:
      
         d=input('Enter a date : ')
@@ -57,7 +63,8 @@ def insert_accessrecords(request):
 
         ob2=AccessRecord.objects.get_or_create(name=ob[0],date=d,author=a)[0]
         ob2.save()
-        return HttpResponse('create successfully') 
+        d={'QLAO':AccessRecord.objects.all()}
+        return render(request,'display_accessrecord.html',d)
      else:
         return HttpResponse('invalid data')
      
