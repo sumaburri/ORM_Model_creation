@@ -74,4 +74,9 @@ def display_webpage(request):
     return render(request,'display_webpage.html',d)
 
 
+def display_accessrecord(request):
+    QLAO=AccessRecord.objects.all()
+    d={'QLAO':QLAO}
+    return render(request,'display_accessrecord.html',d)
+
      
