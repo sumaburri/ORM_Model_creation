@@ -3,6 +3,7 @@ from django.shortcuts import render
 # Create your views here.
 from table_name.models import *
 from django.http import HttpResponse
+from django.db.models.functions import Length
 
 def insert_topic(request):
     tn=input('Enter a topic_name : ')
@@ -77,8 +78,18 @@ def display_topic(request):
 
 def display_webpage(request):
     QLWO=Webpage.objects.all()
+    QLWO=Webpage.objects.filter(topic_name='cricket')
+    QLWO=Webpage.objects.filter(topic_name='ms')
+    QLWO=Webpage.objects.order_by('topic_name')
+    QLWO=Webpage.objects.order_by('id')
+    QLWO=Webpage.objects.order_by('-name')
+    QLWO=Webpage.objects.order_by('-id')
+    QLWO=Webpage.objects.order_by(Length('name'))
+    QLWO=Webpage.objects.order_by(Length('name').desc())
     d={'QLWO':QLWO}
+   
     return render(request,'display_webpage.html',d)
+
 
 
 def display_accessrecord(request):
